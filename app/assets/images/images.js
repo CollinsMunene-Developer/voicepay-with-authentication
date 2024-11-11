@@ -1,0 +1,1 @@
+export {default as bodyimg   } from './home.jpg';

@@ -2,8 +2,55 @@
 @tailwind components;
 @tailwind utilities;
 
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 body {
   font-family: Arial, Helvetica, sans-serif;
+  background: #FFF;
+}
+
+.buttons{
+  translate: 10% -35%;
+}
+
+.clip-path-wave {
+  clip-path: ellipse(150% 100% at  0%);
+}
+
+.body_contents{
+  width: 100%;
+  height: 100vh;
+  background: #000;
+  gap: 3em;
+}
+
+.body_text{
+  text-align: justify;
+}
+
+
+.body_left span{
+  font-size: 3rem;
+  text-transform: capitalize;
+  font-weight: 700;
+  color: blue;
+}
+
+.header_list
+{
+  height: 2rem;
+}
+
+.body-image{
+  width: 60rem;
+  height: 80vh;
+  border: none;
+  border-radius: 50%;
+  margin-top: 2rem;
 }
 
 @layer base {
