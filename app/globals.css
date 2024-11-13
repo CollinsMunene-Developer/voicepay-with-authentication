@@ -2,55 +2,189 @@
 @tailwind components;
 @tailwind utilities;
 
-*{
+* {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-body {
-  font-family: Arial, Helvetica, sans-serif;
-  background: #FFF;
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100..900&display=swap');
+
+.inter {
+  font-family: "Inter", sans-serif;
+  font-weight: 400;
 }
 
-.buttons{
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  background: #fff;
+}
+
+.buttons {
   translate: 10% -35%;
 }
 
 .clip-path-wave {
-  clip-path: ellipse(150% 100% at  0%);
+  clip-path: ellipse(150% 100% at 0%);
 }
 
-.body_contents{
+.body_contents {
   width: 100%;
   height: 100vh;
   background: #000;
   gap: 3em;
 }
 
-.body_text{
+.body_text {
   text-align: justify;
 }
 
-
-.body_left span{
+.body_left span {
   font-size: 3rem;
   text-transform: capitalize;
   font-weight: 700;
   color: blue;
 }
 
-.header_list
-{
+.signupContainer {
+  display: flex;
+  width: 940px;
+  height: 1024px;
+  padding: 30px 44px;
+  flex-direction: column;
+  align-items: center;
+  gap: 33px;
+  flex-shrink: 0;
+  background: var(--Colors-Background-bg-primary, #fff);
+  position: fixed;
+  left: 20rem;
+}
+
+.signup_upper {
+  display: flex;
+  flex-direction: column;
+}
+
+.signupText {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.signupText h1 {
+  align-self: stretch;
+  color: var(--colors-text-text-primary-900, #101828);
+  text-align: center;
+  font-family: var(--Font-family-font-family-display, Inter);
+  font-size: var(--Font-size-display-sm, 30px);
+  font-weight: 600;
+  line-height: var(--Line-height-display-sm, 38px);
+}
+
+.signupText p {
+  align-self: stretch;
+  color: var(--colors-text-text-tertiary-600, #475467);
+  text-align: center;
+  font-family: (Inter);
+  font-size: var(--Font-size-text-md, 16px);
+  font-weight: 400;
+  line-height: var(--Line-height-text-md, 24px);
+}
+
+.signupButtons {
+  height: 36px;
+  width: 360px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: var(--spacing-md, 8px);
+  flex: 1 0 0;
+  border-radius: var(--radius-md, 8px);
+  color: var(--colors-text-text-secondary-700, #344054);
+  font-family: var(--Font-family-font-family-body, Inter);
+  font-size: var(--Font-size-text-sm, 14px);
+  font-weight: 600;
+  line-height: var(--Line-height-text-sm, 20px);
+}
+
+.signupButtons .loginButton {
+  border-radius: var(--radius-md, 8px);
+  border: 1px solid var(--Colors-Border-border-secondary, #e4e7ec);
+  background: var(--Colors-Background-bg-secondary_alt, #f9fafb);
+  width: 181px;
+  height: 2.5rem;
+  color: var(--colors-text-text-quaternary-500, #667085);
+  font-family: (Inter);
+  font-size: var(--Font-size-text-sm, 14px);
+  font-weight: 600;
+  line-height: var(--Line-height-text-sm, 20px);
+}
+
+.signupButtons .signupButton {
+  display: flex;
+  height: 2.5rem;
+  justify-content: center;
+  align-items: center;
+  gap: var(--spacing-md, 8px);
+  flex: 1 0 0;
+  border-radius: var(--radius-md, 8px);
+  border: 1px solid var(--Colors-Border-border-primary, #d0d5dd);
+  background: var(--Colors-Background-bg-primary_alt, #fff);
+  width: 179px;
+  box-shadow: 0px 1px 2px 0px rgba(16, 24, 40, 0.05);
+  color: var(--colors-text-text-secondary-700, #344054);
+  font-family: (Inter);
+  font-size: var(--Font-size-text-sm, 14px);
+  font-weight: 600;
+  line-height: var(--Line-height-text-sm, 20px);
+}
+
+.header_list {
   height: 2rem;
 }
 
-.body-image{
+.body-image {
   width: 60rem;
   height: 80vh;
-  border: none;
   border-radius: 50%;
   margin-top: 2rem;
+}
+
+.continue_with_Buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.continue_with_google {
+  height: 2.5rem;
+  width: 360px;
+  display: flex;
+  padding: 10px var(--spacing-xl, 16px);
+  justify-content: center;
+  align-items: center;
+  gap: var(--spacing-sm, 6px);
+  border-radius: var(--radius-md, 8px);
+  border: 2px solid rgba(255, 255, 255, 0.12);
+  background: #7f56d9;
+  box-shadow: 0px 0px 0px 1px rgba(16, 24, 40, 0.18) inset, 0px -2px 0px 0px rgba(16, 24, 40, 0.05) inset, 0px 1px 2px 0px rgba(16, 24, 40, 0.05);
+}
+
+.continue_with_github, .continue_with_facebook, .continue_with_apple {
+  width: 360px;
+  height: 2.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: var(--spacing-lg, 12px);
+  border-radius: var(--radius-md, 8px);
+  border: 1px solid var(--Colors-Border-border-primary, #d0d5dd);
+  background: #000;
+  color: #fff;
+  font-family: (Inter);
+  font-size: var(--Font-size-text-md, 16px);
+  font-weight: 400;
+  line-height: var(--Line-height-text-md, 24px);
 }
 
 @layer base {
@@ -81,6 +215,7 @@ body {
     --chart-5: 27 87% 67%;
     --radius: 0.5rem;
   }
+
   .dark {
     --background: 0 0% 3.9%;
     --foreground: 0 0% 98%;
@@ -100,20 +235,6 @@ body {
     --destructive-foreground: 0 0% 98%;
     --border: 0 0% 14.9%;
     --input: 0 0% 14.9%;
-    --ring: 0 0% 83.1%;
-    --chart-1: 220 70% 50%;
-    --chart-2: 160 60% 45%;
-    --chart-3: 30 80% 55%;
-    --chart-4: 280 65% 60%;
-    --chart-5: 340 75% 55%;
-  }
-}
-
-@layer base {
-  * {
-    @apply border-border;
-  }
-  body {
-    @apply bg-background text-foreground;
+    --ring: 0 0% 98%;
   }
 }
