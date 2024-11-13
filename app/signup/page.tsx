@@ -1,11 +1,11 @@
 import "@/app/globals.css";
 import { FaGithub, FaGoogle, FaFacebook, FaApple } from "react-icons/fa";
 import Image from "next/image";
-
+import SignupForm from "../components/forms/signupForm";
 const Page = () => {
   return (
-    <div className="signupPage bg-slate-400">
-      <div className="signupContainer p-28">
+    <div className="signupPage">
+      <div className="signupContainer p- bg-black">
         <div className="signup_upper">
           <div className="signupText">
             <h1>Create an Account</h1>
@@ -18,7 +18,10 @@ const Page = () => {
         </div>
 
         <div className="signup_lower">
-          <div className="signupForm"></div>
+          <div className="signupForm">
+            <SignupForm />
+
+          </div>
 
           <div className="continue_with_Buttons">
             <p style={{ color: "black", fontSize: "", marginLeft: "8.5rem" }}>Or</p>

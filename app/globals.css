@@ -238,3 +238,7 @@ body {
     --ring: 0 0% 98%;
   }
 }
+
+.shad-primary-btn {
+  @apply bg-black text-white !important;
+}
