@@ -7,6 +7,7 @@ import { z } from "zod";
 import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
 import {UserIcon, EmailIcon, PasswordIcon} from '../../assets/icons/icons'
+import {HandleSignup} from '@/actions/Signup'
 
 import {
   Form,
@@ -62,6 +63,7 @@ export function signupForm() {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
 
+
   //define the form
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -74,10 +76,9 @@ export function signupForm() {
       phone: "",
     },
   });
+//handle submit to the supabase with the import function
 
-  const onSubmit = (data: any) => {
-    console.log(data);
-  };
+
 
   return (
     <Form {...form}>
