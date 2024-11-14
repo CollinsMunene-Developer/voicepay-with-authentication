@@ -1,21 +1,18 @@
 import "@/app/globals.css";
-import { FaGithub, FaGoogle, FaFacebook, FaApple } from "react-icons/fa";
+import { FaGithub, FaGoogle, FaFacebook, FaApple, FaMicrosoft } from "react-icons/fa";
 import Image from "next/image";
 import SignupForm from "../components/forms/signupForm";
 const Page = () => {
   return (
     <div className="signupPage">
       <div className="signupContainer p- bg-black">
-        <div className="signup_upper">
-          <div className="signupText">
-            <h1>Create an Account</h1>
-            <p>Sign up to start your journey with us</p>
-          </div>
+        {/* <div className="signup_upper">
+
           <div className="signupButtons">
             <button className="signupButton">Sign Up</button>
             <button className="loginButton">Login</button>
           </div>
-        </div>
+        </div> */}
 
         <div className="signup_lower">
           <div className="signupForm">
@@ -33,15 +30,13 @@ const Page = () => {
               <FaGithub style={{ height: "24px", width: "24px" }} />
               Continue with Github
             </button>
-            <button className="continue_with_facebook" style={{ background: "blue" }}>
-              <FaFacebook style={{ height: "24px", width: "24px" }} />
-              Continue with Facebook
-            </button>
+
             <button className="continue_with_apple">
               <FaApple style={{ height: "24px", width: "24px" }} />
               Continue with Apple
             </button>
-            <button className="Continue_with_microsoft">
+            <button className="Continue_with_microsoft bg-blue-600 text-white">
+              <FaMicrosoft style={{ height: "24px", width: "24px" }} />
               Continue with Microsoft
             </button>
           </div>

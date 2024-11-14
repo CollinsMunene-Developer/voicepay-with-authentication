@@ -153,7 +153,7 @@ body {
 .continue_with_Buttons {
   display: flex;
   flex-direction: column;
-  gap: 0.5rem;
+  gap: 0.2rem;
 }
 
 .continue_with_google {
@@ -170,7 +170,7 @@ body {
   box-shadow: 0px 0px 0px 1px rgba(16, 24, 40, 0.18) inset, 0px -2px 0px 0px rgba(16, 24, 40, 0.05) inset, 0px 1px 2px 0px rgba(16, 24, 40, 0.05);
 }
 
-.continue_with_github, .continue_with_facebook, .continue_with_apple {
+.continue_with_github, .continue_with_facebook, .continue_with_apple{
   width: 360px;
   height: 2.5rem;
   display: flex;
@@ -180,6 +180,23 @@ body {
   border-radius: var(--radius-md, 8px);
   border: 1px solid var(--Colors-Border-border-primary, #d0d5dd);
   background: #000;
+  color: #fff;
+  font-family: (Inter);
+  font-size: var(--Font-size-text-md, 16px);
+  font-weight: 400;
+  line-height: var(--Line-height-text-md, 24px);
+}
+
+.Continue_with_microsoft{
+  width: 360px;
+  height: 2.5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: var(--spacing-lg, 12px);
+  border-radius: var(--radius-md, 8px);
+  border: 1px solid var(--Colors-Border-border-primary, #d0d5dd);
+  background: darkblue;
   color: #fff;
   font-family: (Inter);
   font-size: var(--Font-size-text-md, 16px);
@@ -239,6 +256,14 @@ body {
   }
 }
 
-.shad-primary-btn {
-  @apply bg-black text-white !important;
+.signupform{
+  display: flex;
+  flex-direction: column;
+  margin-top: -1.5rem;
+  gap: 0.2rem;
 }
+
+
+
+
+
