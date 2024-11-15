@@ -5,6 +5,7 @@ interface Buttonprops {
   isLoading: boolean;
   className?: string;
   children: React.ReactNode;
+  type?: "submit" | "button";
 }
 
 import Image from "next/image";

@@ -8,7 +8,6 @@ import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
 import {UserIcon, EmailIcon, PasswordIcon} from '../../assets/icons/icons'
 import {HandleSignup} from '@/actions/Signup'
-
 import {
   Form,
   FormControl,
@@ -23,6 +22,8 @@ import SubmitButton from "../submitButton";
 import CustomFieldForm from "../CustomFieldForm";
 import { FaUser } from "react-icons/fa";
 import '../../globals.css'
+import { ToastContainer, toast } from 'react-toastify';
+  import 'react-toastify/dist/ReactToastify.css';
 
 export enum FormFieldType {
   INPUT = "input",
@@ -57,14 +58,15 @@ const formSchema = z.object({
   phone: z.string().min(10, {
     message: "Phone number must be at least 10 characters.",
   }),
+}).refine((data) => data.password === data.confirmPassword, {
+  message: "Passwords don't match",
+  path: ["confirmPassword"],
 });
 
-export function signupForm() {
+export function SignupForm() {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
 
-
-  //define the form
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -73,16 +75,41 @@ export function signupForm() {
       username: "",
       email: "",
       password: "",
+      confirmPassword: "",
       phone: "",
     },
   });
-//handle submit to the supabase with the import function
 
+  const onSubmit = async (values: z.infer<typeof formSchema>) => {
+    try {
+      setIsLoading(true);
+      
+      // Call the HandleSignup function with the form data
+      const data = await HandleSignup({
+        email: values.email,
+        password: values.password,
+        firstName: values.firstName,
+        lastName: values.lastName,
+        phone: values.phone
+      });
 
+      // Show success message
+      toast.success("Account created successfully! Please check your email to verify your account.");
+
+      // Redirect to login page or dashboard
+      router.push('/login');
+
+    } catch (error) {
+      // Show error message
+      toast.error(error instanceof Error ? error.message : "Error creating account. Something went wrong. Please try again.");
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   return (
     <Form {...form}>
-      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y flex-1 mt-0   signupform">
+      <form onSubmit={form.handleSubmit(onSubmit)} className="space-y flex-1 mt-0 signupform">
         <section className="mb-2 space-y-1 ">
           <h1 className="text-3xl text-black ml-16 font-bold">
             {" "}
@@ -90,67 +117,79 @@ export function signupForm() {
           </h1>
           <p className="text-black ml-0 font-bold">    
             Welcome to VoicePay, Sign up to continue 
-                 </p>
+          </p>
         </section>
 
         <div className="ml-5">
-        <CustomFieldForm
-        fieldType={FormFieldType.INPUT} 
-        control={form.control}
-        firstName="firstName"
-        label="First Name "
-        placeholder="Enter your first name"
-      iconSrc={UserIcon}
-        />
-        <CustomFieldForm
-        fieldType={FormFieldType.INPUT} 
-        control={form.control}
-        firstName="LastName"
-        label="Last  Name "
-        placeholder="Enter your last name"
-      iconSrc={UserIcon}
-        />
-        <CustomFieldForm
-        fieldType={FormFieldType.INPUT} 
-        control={form.control}
-        firstName="username"
-        label="Username "
-        placeholder="provide Your default  username"
-      iconSrc={UserIcon}
-        />
-        <CustomFieldForm
-        fieldType={FormFieldType.INPUT} 
-        control={form.control}
-        email="email"
-        label="Email"
-        placeholder=" Enter your email address"
-      iconSrc={EmailIcon}
-        />
-        <CustomFieldForm
-        fieldType={FormFieldType.PHONE_INPUT} 
-        control={form.control}
-        name="phone"
-        label="Phone Number"
-        placeholder=" (234) 123-4567"
-      iconSrc={EmailIcon}
-        />
-
-<CustomFieldForm
-        fieldType={FormFieldType.INPUT} 
-        control={form.control}
-        password="Password"
-        label="Password"
-        placeholder=" Enter a valid password" 
-      iconSrc={PasswordIcon}
-        />
-
+          <CustomFieldForm
+            fieldType={FormFieldType.INPUT} 
+            control={form.control}
+            firstName="firstName"
+            label="First Name "
+            placeholder="Enter your first name"
+            iconSrc={UserIcon}
+          />
+          <CustomFieldForm
+            fieldType={FormFieldType.INPUT} 
+            control={form.control}
+            firstName="lastName"
+            label="Last Name "
+            placeholder="Enter your last name"
+            iconSrc={UserIcon}
+          />
+          <CustomFieldForm
+            fieldType={FormFieldType.INPUT} 
+            control={form.control}
+            firstName="username"
+            label="Username "
+            placeholder="provide Your default username"
+            iconSrc={UserIcon}
+          />
+          <CustomFieldForm
+            fieldType={FormFieldType.INPUT} 
+            control={form.control}
+            email="email"
+            label="Email"
+            placeholder="Enter your email address"
+            iconSrc={EmailIcon}
+          />
+          <CustomFieldForm
+            fieldType={FormFieldType.PHONE_INPUT} 
+            control={form.control}
+            name="phone"
+            label="Phone Number"
+            placeholder="(234) 123-4567"
+            iconSrc={EmailIcon}
+          />
+          <CustomFieldForm
+            fieldType={FormFieldType.INPUT} 
+            control={form.control}
+            password="password"
+            label="Password"
+            placeholder="Enter a valid password" 
+            iconSrc={PasswordIcon}
+          />
+          <CustomFieldForm
+            fieldType={FormFieldType.INPUT} 
+            control={form.control}
+            password="confirmPassword"
+            label="Confirm Password"
+            placeholder="Confirm your password" 
+            iconSrc={PasswordIcon}
+            type="password"
+          />
         </div>
- 
 
-
-        <SubmitButton className="bg-blue-800 h-10 w-28  mt-3 ml-28 text-gray-200 "   isLoading={isLoading}>Sign Up</SubmitButton>
+        <SubmitButton 
+          className="bg-blue-800 h-10 w-28 mt-3 ml-28 text-gray-200"   
+          isLoading={isLoading}
+          type="submit"
+        >
+          Sign Up
+        </SubmitButton>
       </form>
     </Form>
   );  
 }
-export default signupForm;
+
+export default SignupForm;

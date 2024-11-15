@@ -29,6 +29,7 @@ interface CustomFieldProps {
   iconSrc?: string;
   iconAlt?: string;
   disables?: boolean;
+  type?: string;
   dateFormat?: string;
   fieldType?: FormFieldType;
   showTimeSelect?: boolean;
@@ -46,53 +47,50 @@ const RenderField = ({
   const { fieldType, iconSrc, iconAlt, placeholder } = props;
   switch (fieldType) {
     case FormFieldType.INPUT:
-      return (
-        <div className="flex rounded-md border border-black   bg-gray-100">
-          {iconSrc && (
-            <Image
-              src={iconSrc}
-              alt={iconAlt || "icon"}
-              width={24}
-              height={24}
-              className="ml-3    "
-            />
-          )}
-          <FormControl>
-            <Input
-              placeholder={placeholder}
-              {...field}
-              className="shad-input border- text-black"
-            />
-          </FormControl>
-        </div>
-      );
+        return (
+          <div className="flex rounded-md border border-black bg-gray-100">
+            {iconSrc && (
+              <Image
+                src={iconSrc}
+                alt={iconAlt || "icon"}
+                width={24}
+                height={24}
+                className="ml-3"
+              />
+            )}
+            <FormControl>
+              <Input
+                placeholder={placeholder}
+                {...field}
+                type={props.type} // Move `type` inside `Input`
+                className="shad-input border- text-black"
+              />
+            </FormControl>
+          </div>
+        );
+      
 
     default:
       return null;
 
       case FormFieldType.PHONE_INPUT:
-        return (
-            <div className="flex rounded-md border  bg-gray-100">
-                        <FormControl>
-                            <div className="">
-                            <PhoneInput
-            defaultCountry="KE"
-            placeholder={placeholder}
-            international
-            withCountryCallingCode
-            value={field.value as E164Number | undefined} 
-            onChange={field.onChange}
-            className="input-phone  text-white"
-            />
-
-                            </div>
-
-            
-            
-        </FormControl>
+        case FormFieldType.PHONE_INPUT:
+          return (
+            <div className="flex rounded-md border bg-gray-100">
+              <FormControl>
+                <PhoneInput
+                  defaultCountry="KE"
+                  placeholder={placeholder}
+                  international
+                  withCountryCallingCode
+                  value={field.value as E164Number | undefined}
+                  onChange={field.onChange}
+                  className="input-phone text-white"
+                />
+              </FormControl>
             </div>
-
-        )
+          );
+        
             return null
   }
 };  
