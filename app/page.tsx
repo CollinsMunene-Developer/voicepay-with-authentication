@@ -27,7 +27,7 @@ const page = () => {
       }
     }
   return (
-    <div className="h-screen w-full min-h-screen">
+    <div className="h-screen w-full min-h-screen bg-blue-100">
       <div className="flex h-3 w-fit justify-between p-8 gap-96">
         <div className="logo font-extrabold text-slate-500 text-xl">
           <h2>Voice_pay</h2>

@@ -66,6 +66,7 @@ const formSchema = z.object({
 export function SignupForm() {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState("");
 
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
@@ -80,36 +81,35 @@ export function SignupForm() {
     },
   });
 
-const onSubmit = async (values: z .infer<typeof formSchema> ) =>
-{
-  try {
-    setIsLoading(true);
-    const result = await handleSignup({
-      email: values.email,
-      password: values.password,
-      firstName: values.firstName,
-      lastName: values.lastName,
-      username: values.username,
-      phone: values.phone,
-    });
-    
 
-    //show success message
-    toast.success("Account created successfully")
+  const onSubmit = async (values: z.infer<typeof formSchema>) => {
+    try {
+      setIsLoading(true);
+      setError("");
 
-    //redirect to the login page
-    router.push("/login");
-  } catch (error) {
-    //show error using toast
-    toast.error(error instanceof Error  ? error.message: "Error creating the account . please try again");
-    
-  }
-  finally {
-    setIsLoading(false);
-  }
+      // Log the values being sent
+      console.log("Submitting form with values:", values);
 
-};
+      const result = await handleSignup({
+        email: values.email,
+        password: values.password,
+        firstName: values.firstName,
+        lastName: values.lastName,
+        username: values.username,
+        phone: values.phone,
+      });
 
+      toast.success("Account created successfully!");
+      router.push("/login");
+    } catch (error) {
+      console.error("Signup error:", error);
+      const errorMessage = error instanceof Error ? error.message : "Error creating account. Please try again.";
+      toast.error(errorMessage);
+      setError(errorMessage);
+    } finally {
+      setIsLoading(false);
+    }
+  };
   return (
     <Form {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)} className="space-y flex-1 mt-0 signupform">
@@ -182,6 +182,17 @@ const onSubmit = async (values: z .infer<typeof formSchema> ) =>
         >
           Sign Up
         </SubmitButton>
+
+        <ToastContainer
+        position="top-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        />
       </form>
     </Form>
   );  

@@ -4,8 +4,8 @@ import Image from "next/image";
 import SignupForm from "../components/forms/signupForm";
 const Page = () => {
   return (
-    <div className="signupPage bg-blue-300">
-      <div className="signupContainer rounded-md">
+    <div className="signupPage ">
+      <div className="signupContainer rounded-md ">
         {/* <div className="signup_upper">
 
           <div className="signupButtons">
@@ -20,7 +20,7 @@ const Page = () => {
 
           </div>
 
-          <div className="continue_with_Buttons">
+          <div className="continue_with_Buttons  justify-center align-middle">
             <p style={{ color: "black", fontSize: "", marginLeft: "8.5rem" }}>Or</p>
             <button className="continue_with_google">
               <FaGoogle style={{ height: "20px", width: "20px" }} />
