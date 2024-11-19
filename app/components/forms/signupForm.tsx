@@ -7,7 +7,7 @@ import { z } from "zod";
 import { Button } from "@/components/ui/button";
 import { useRouter } from "next/navigation";
 import {UserIcon, EmailIcon, PasswordIcon} from '../../assets/icons/icons'
-import {HandleSignup} from '@/actions/Signup'
+import {handleSignup} from '@/actions/Signup'
 import {
   Form,
   FormControl,
@@ -80,32 +80,35 @@ export function SignupForm() {
     },
   });
 
-  const onSubmit = async (values: z.infer<typeof formSchema>) => {
-    try {
-      setIsLoading(true);
-      
-      // Call the HandleSignup function with the form data
-      const data = await HandleSignup({
-        email: values.email,
-        password: values.password,
-        firstName: values.firstName,
-        lastName: values.lastName,
-        phone: values.phone
-      });
+const onSubmit = async (values: z .infer<typeof formSchema> ) =>
+{
+  try {
+    setIsLoading(true);
+    const result = await handleSignup({
+      email: values.email,
+      password: values.password,
+      firstName: values.firstName,
+      lastName: values.lastName,
+      username: values.username,
+      phone: values.phone,
+    });
+    
 
-      // Show success message
-      toast.success("Account created successfully! Please check your email to verify your account.");
+    //show success message
+    toast.success("Account created successfully")
 
-      // Redirect to login page or dashboard
-      router.push('/login');
+    //redirect to the login page
+    router.push("/login");
+  } catch (error) {
+    //show error using toast
+    toast.error(error instanceof Error  ? error.message: "Error creating the account . please try again");
+    
+  }
+  finally {
+    setIsLoading(false);
+  }
 
-    } catch (error) {
-      // Show error message
-      toast.error(error instanceof Error ? error.message : "Error creating account. Something went wrong. Please try again.");
-    } finally {
-      setIsLoading(false);
-    }
-  };
+};
 
   return (
     <Form {...form}>
@@ -169,15 +172,7 @@ export function SignupForm() {
             placeholder="Enter a valid password" 
             iconSrc={PasswordIcon}
           />
-          <CustomFieldForm
-            fieldType={FormFieldType.INPUT} 
-            control={form.control}
-            password="confirmPassword"
-            label="Confirm Password"
-            placeholder="Confirm your password" 
-            iconSrc={PasswordIcon}
-            type="password"
-          />
+
         </div>
 
         <SubmitButton 

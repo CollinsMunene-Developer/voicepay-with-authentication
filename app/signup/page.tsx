@@ -4,8 +4,8 @@ import Image from "next/image";
 import SignupForm from "../components/forms/signupForm";
 const Page = () => {
   return (
-    <div className="signupPage">
-      <div className="signupContainer p- bg-black">
+    <div className="signupPage bg-blue-300">
+      <div className="signupContainer rounded-md">
         {/* <div className="signup_upper">
 
           <div className="signupButtons">
